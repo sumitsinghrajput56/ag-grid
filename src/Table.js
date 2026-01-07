@@ -19,7 +19,7 @@ export const Table = () => {
     {
       headerName: "Name",
       field: "name",
-      checkboxSelection:true
+      checkboxSelection: true,
     },
     {
       headerName: "Age",
@@ -31,16 +31,31 @@ export const Table = () => {
     sortable: true,
     editable: true,
     filter: true,
+    floatingFilter: true,
+    flex: 1,
+  };
+
+  let gridApi;
+  const onGridReady = (params) => {
+    gridApi = params.api;
+  };
+
+  const onExportClick = () => {
+    gridApi.exportDataAsCsv();
   };
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400 }}>
-      <AgGridReact
-        rowData={rowData}
-        columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
-        rowSelection="multiple"
-      />
+    <div>
+      <button onClick={() => onExportClick()}>Export</button>
+      <div className="ag-theme-alpine" style={{ height: 400 }}>
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          rowSelection="multiple"
+          onGridReady={onGridReady}
+        />
+      </div>
     </div>
   );
 };
