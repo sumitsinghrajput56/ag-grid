@@ -1,11 +1,11 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
-import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
+import { ModuleRegistry, AllCommunityModule, TooltipModule } from "ag-grid-community";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([AllCommunityModule, TooltipModule]);
 
 export const Table = () => {
   const rowData = [
@@ -15,13 +15,22 @@ export const Table = () => {
   ];
 
   const columnDefs = [
-    { headerName: "Name", field: "name" },
+    {
+      headerName: "Name",
+      field: "name",
+      tooltipField: "name",
+    },
     {
       headerName: "Age",
       field: "age",
-      cellClass: (params) => (params.value>18?"MoreThen18":"LessThen18"),
+      tooltipField: "name", // you can show age too
+      cellStyle: (params) => ({
+        backgroundColor: params.value > 18 ? "lightgreen" : "lightcoral",
+        color: "black",
+        fontWeight: "600",
+      }),
     },
-    { headerName: "Birth Year", field: "birthYear" },
+    { headerName: "Birth Year", field: "birthYear", tooltipField: "name" },
   ];
 
   return (
@@ -30,6 +39,8 @@ export const Table = () => {
         rowData={rowData}
         columnDefs={columnDefs}
         defaultColDef={{ sortable: true, filter: true, flex: 1 }}
+        enableBrowserTooltips={true}
+        tooltipShowDelay={{tooltipShowDelay:2}}
       />
     </div>
   );
