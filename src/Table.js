@@ -23,6 +23,7 @@ export const Table = () => {
       headerName: "ID",
       field: "id",
       tooltipField: "name",
+      checkboxSelection:true
     },
     {
       headerName: "Name",
@@ -68,6 +69,7 @@ export const Table = () => {
         tooltipShowDelay={{ tooltipShowDelay: 2 }}
         rowSelection={rowSelectionType}
         onSelectionChanged={onSelectionChanged}
+        rowMultiSelectWithClick={true}
       />
     </div>
   );
