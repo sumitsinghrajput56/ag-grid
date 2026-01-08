@@ -18,6 +18,10 @@ export const Table = () => {
   //     { name: "ankit", age: 32, birthYear: 2008 },
   //   ];
 
+  const isRowSelectable = (node) => {
+    return node.data.id%2 == 0 ? true : false;
+  }
+
   const columnDefs = [
     {
       headerName: "ID",
@@ -25,7 +29,6 @@ export const Table = () => {
     //   tooltipField: "name",
       checkboxSelection:true,
       headerCheckboxSelection:true,
-      
     },
     {
       headerName: "Name",
@@ -72,6 +75,8 @@ export const Table = () => {
         rowSelection={rowSelectionType}
         onSelectionChanged={onSelectionChanged}
         rowMultiSelectWithClick={true}
+      isRowSelectable={isRowSelectable}
+
       />
     </div>
   );
