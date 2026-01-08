@@ -22,13 +22,15 @@ export const Table = () => {
     {
       headerName: "ID",
       field: "id",
-      tooltipField: "name",
-      checkboxSelection:true
+    //   tooltipField: "name",
+      checkboxSelection:true,
+      headerCheckboxSelection:true,
+      
     },
     {
       headerName: "Name",
       field: "name",
-      tooltipField: "name",
+    //   tooltipField: "name",
     },
     {
       headerName: "Email",
@@ -53,7 +55,7 @@ export const Table = () => {
       });
   };
 
-  const rowSelectionType = "single";
+  const rowSelectionType = "multiple";
 
   const onSelectionChanged = (event) => {
     console.log(event.api.getSelectedRows());
