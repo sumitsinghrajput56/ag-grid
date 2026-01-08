@@ -1,61 +1,42 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
 
-import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
-
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+const ActionButton = ({ data }) => {
+  return (
+    <button onClick={() => console.log(`${data.make} ${data.model}` )}>
+      Click me
+    </button>
+  );
+};
 
 export const Table = () => {
   const rowData = [
-    { name: "sumit", age: 27 },
-    { name: "arnab", age: 20 },
-    { name: "anubhav", age: 23 },
+    { make: "Toyota", model: "Celica", price: 25000 },
+    { make: "Tata", model: "xl", price: 35000 },
+    { make: "Mahindra", model: "x", price: 4000 },
   ];
 
   const columnDefs = [
+    { headerName: "Make", field: "make" },
+    { headerName: "Model", field: "model" },
+    { headerName: "Price", field: "price" },
     {
-      headerName: "Name",
-      field: "name",
-      checkboxSelection: true,
-    },
-    {
-      headerName: "Age",
-      field: "age",
+      headerName: "Action",
+      field: "price",
+      cellRenderer: ActionButton,
     },
   ];
 
-  const defaultColDef = {
-    sortable: true,
-    editable: true,
-    filter: true,
-    floatingFilter: true,
-    flex: 1,
-  };
-
-  let gridApi;
-  const onGridReady = (params) => {
-    gridApi = params.api;
-  };
-
-  const onExportClick = () => {
-    gridApi.exportDataAsCsv();
-  };
-
   return (
-    <div>
-      <button onClick={() => onExportClick()}>Export</button>
-      <div className="ag-theme-alpine" style={{ height: 400 }}>
-        <AgGridReact
-          rowData={rowData}
-          columnDefs={columnDefs}
-          defaultColDef={defaultColDef}
-          rowSelection="multiple"
-          onGridReady={onGridReady}
-        />
-      </div>
+    <div className="ag-theme-alpine" style={{ height: 400 }}>
+      <AgGridReact
+        rowData={rowData}
+        columnDefs={columnDefs}
+        defaultColDef={{ sortable: true, filter: true, flex: 1 }}
+      />
     </div>
   );
 };
