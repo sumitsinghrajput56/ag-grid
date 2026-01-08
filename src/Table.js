@@ -12,11 +12,11 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 ModuleRegistry.registerModules([AllCommunityModule, TooltipModule]);
 
 export const Table = () => {
-//   const rowData = [
-//     { name: "arnab", age: 22, birthYear: 2000 },
-//     { name: "aman", age: 14, birthYear: 2002 },
-//     { name: "ankit", age: 32, birthYear: 2008 },
-//   ];
+  //   const rowData = [
+  //     { name: "arnab", age: 22, birthYear: 2000 },
+  //     { name: "aman", age: 14, birthYear: 2002 },
+  //     { name: "ankit", age: 32, birthYear: 2008 },
+  //   ];
 
   const columnDefs = [
     {
@@ -24,34 +24,39 @@ export const Table = () => {
       field: "id",
       tooltipField: "name",
     },
-      {
+    {
       headerName: "Name",
       field: "name",
       tooltipField: "name",
     },
-      {
+    {
       headerName: "Email",
       field: "email",
     },
-      {
+    {
       headerName: "Body",
       field: "body",
     },
-      {
+    {
       headerName: "PostId",
       field: "postId",
     },
-   
   ];
 
   const onGridReady = (params) => {
     fetch("https://jsonplaceholder.typicode.com/comments")
       .then((resp) => resp.json())
-      .then((resp) => { console.log(resp)
-         params.api.applyTransaction({ add: resp })});
+      .then((resp) => {
+        console.log(resp);
+        params.api.applyTransaction({ add: resp });
+      });
   };
 
-  const rowSelectionType="single";
+  const rowSelectionType = "single";
+
+  const onSelectionChanged = (event) => {
+    console.log(event.api.getSelectedRows());
+  };
 
   return (
     <div className="ag-theme-quartz" style={{ height: 400 }}>
@@ -62,6 +67,7 @@ export const Table = () => {
         onGridReady={onGridReady}
         tooltipShowDelay={{ tooltipShowDelay: 2 }}
         rowSelection={rowSelectionType}
+        onSelectionChanged={onSelectionChanged}
       />
     </div>
   );
