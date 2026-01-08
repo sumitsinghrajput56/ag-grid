@@ -51,6 +51,8 @@ export const Table = () => {
          params.api.applyTransaction({ add: resp })});
   };
 
+  const rowSelectionType="single";
+
   return (
     <div className="ag-theme-quartz" style={{ height: 400 }}>
       <AgGridReact
@@ -59,6 +61,7 @@ export const Table = () => {
         enableBrowserTooltips={true}
         onGridReady={onGridReady}
         tooltipShowDelay={{ tooltipShowDelay: 2 }}
+        rowSelection={rowSelectionType}
       />
     </div>
   );
