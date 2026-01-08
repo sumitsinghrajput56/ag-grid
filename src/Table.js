@@ -19,11 +19,7 @@ export const Table = () => {
     {
       headerName: "Age",
       field: "age",
-      cellStyle: (params) => ({
-        backgroundColor: params.value > 18 ? "lightgreen" : "lightcoral",
-        color: "black",
-        fontWeight: "600",
-      }),
+      cellClass: (params) => (params.value>18?"MoreThen18":"LessThen18"),
     },
     { headerName: "Birth Year", field: "birthYear" },
   ];

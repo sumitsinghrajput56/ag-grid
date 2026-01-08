@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+.MoreThen18 
+{
+  background-color: green;
+}
+.LessThen18
+{
+  background-color: red;
+}
