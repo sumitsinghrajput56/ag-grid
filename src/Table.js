@@ -1,37 +1,35 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
+import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
 
 import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-alpine.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
 
-const ActionButton = ({ data }) => {
-  return (
-    <button onClick={() => console.log(`${data.make} ${data.model}` )}>
-      Click me
-    </button>
-  );
-};
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 export const Table = () => {
   const rowData = [
-    { make: "Toyota", model: "Celica", price: 25000 },
-    { make: "Tata", model: "xl", price: 35000 },
-    { make: "Mahindra", model: "x", price: 4000 },
+    { name: "arnab", age: 22, birthYear: 2000 },
+    { name: "aman", age: 14, birthYear: 2002 },
+    { name: "ankit", age: 32, birthYear: 2008 },
   ];
 
   const columnDefs = [
-    { headerName: "Make", field: "make" },
-    { headerName: "Model", field: "model" },
-    { headerName: "Price", field: "price" },
+    { headerName: "Name", field: "name" },
     {
-      headerName: "Action",
-      field: "price",
-      cellRenderer: ActionButton,
+      headerName: "Age",
+      field: "age",
+      cellStyle: (params) => ({
+        backgroundColor: params.value > 18 ? "lightgreen" : "lightcoral",
+        color: "black",
+        fontWeight: "600",
+      }),
     },
+    { headerName: "Birth Year", field: "birthYear" },
   ];
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400 }}>
+    <div className="ag-theme-quartz" style={{ height: 400 }}>
       <AgGridReact
         rowData={rowData}
         columnDefs={columnDefs}
